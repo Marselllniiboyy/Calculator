@@ -1,0 +1,13 @@
+main {
+  width: 50%;
+}
+
+#display {
+  background-color: aliceblue;
+  height: 50px;
+  width: 100%;
+}
+
+#number {
+  background-color: pink;
+}
