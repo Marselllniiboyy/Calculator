@@ -3,11 +3,12 @@ main {
 }
 
 #display {
-  background-color: aliceblue;
+  background-color: rgb(125, 179, 225);
   height: 50px;
   width: 100%;
 }
 
 #number {
   background-color: pink;
+  padding: 5px;
 }
