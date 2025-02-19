@@ -2,20 +2,20 @@ const btns = document.querySelectorAll("button");
 const display = document.getElementById("display");
 let expression = ""; //penyimpan expresi matematika
 
-function add(a, b) {
-  return a + b;
-}
+function calculate(a, operator, b) {
+  a = parseFloat(a);
+  b = parseFloat(b);
 
-function subtract(a, b) {
-  return a - b;
-}
-
-function multiply(a, b) {
-  return a * b;
-}
-
-function divide(a, b) {
-  return a / b;
+  switch (operator) {
+    case "+":
+      return a + b;
+    case "-":
+      return a - b;
+    case "x":
+      return a * b;
+    case "/":
+      return a / b;
+  }
 }
 
 btns.forEach((btn) => {
@@ -23,18 +23,21 @@ btns.forEach((btn) => {
     const value = btn.value;
     if (value === "=") {
       let operators = expression.match(/[\+\-x\/]/g);
-      let numbers = expression.split(/[\x\-x\/]/);
+      let numbers = expression.split(/[\+\-x\/]/);
+
       console.log(operators);
       console.log(numbers);
-
-      let result = numbers.shift();
-      while (operators && operators.length > 0) {
-        let operator = operators.shift();
+      let result = parseFloat(numbers[0]);
+      for (let i = 0; i < operators.length; i++) {
+        let b = parseFloat(numbers[i + 1]);
+        result = calculate(result, operators[i], b);
       }
+      console.log(result);
+      display.innerHTML = result;
+      expression = result.toString();
     } else {
       expression += value;
       display.innerHTML = expression;
-      console.log(expression);
     }
   });
 });
