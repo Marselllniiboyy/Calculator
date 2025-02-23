@@ -36,8 +36,13 @@ btns.forEach((btn) => {
       display.innerHTML = result;
       expression = result.toString();
     } else {
-      expression += value;
-      display.innerHTML = expression;
+      if (value === "c") {
+        display.innerHTML = "";
+        expression = "";
+      } else {
+        expression += value;
+        display.innerHTML = expression;
+      }
     }
   });
 });
