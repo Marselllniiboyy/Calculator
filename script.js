@@ -18,30 +18,51 @@ function calculate(a, operator, b) {
   }
 }
 
+//logik perkalian dulu
+// index untuk (x,/)
+
 btns.forEach((btn) => {
   btn.addEventListener("click", () => {
     const value = btn.value;
     if (value === "=") {
       let operators = expression.match(/[\+\-x\/]/g);
-      let numbers = expression.split(/[\+\-x\/]/);
+      let numbers = expression.split(/[\+\-x\/]/).map(Number);
 
-      console.log(operators);
-      console.log(numbers);
-      let result = parseFloat(numbers[0]);
+      console.log("Operator", operators);
+      console.log("Numbers", numbers);
+
       for (let i = 0; i < operators.length; i++) {
-        let b = parseFloat(numbers[i + 1]);
-        result = calculate(result, operators[i], b);
+        if (operators[i] === "x" || operators[i] === "/") {
+          let result = calculate(numbers[i], operators[i], numbers[i + 1]);
+          numbers.splice(i, 2, result);
+          operators.splice(i, 1);
+          i--;
+        }
       }
-      console.log(result);
-      display.innerHTML = result;
-      expression = result.toString();
+
+      for (let i = 0; i < operators.length; i++) {
+        let result = calculate(numbers[i], operators[i], numbers[i + 1]);
+        numbers.splice(i, 2, result); //repleace
+        operators.splice(i, 1); //hapus operator
+        i--;
+      }
+
+      let finalResult = numbers[0];
+      display.innerHTML = finalResult;
+      console.log("Hasil Akhir:", finalResult);
+      expression = finalResult.toString();
     } else {
       if (value === "c") {
         display.innerHTML = "";
         expression = "";
       } else {
-        expression += value;
-        display.innerHTML = expression;
+        if (/[+\-x/]/.test(expression.slice(-1)) && /[+\-x/]/.test(value)) {
+          return;
+        } else {
+          expression += value;
+          display.innerHTML = expression;
+          console.log(expression);
+        }
       }
     }
   });
