@@ -18,8 +18,9 @@ function calculate(a, operator, b) {
   }
 }
 
-//logik perkalian dulu
-// index untuk (x,/)
+//logik perkalian dulu✅
+// bacspace fitur
+// negatif number
 
 btns.forEach((btn) => {
   btn.addEventListener("click", () => {
