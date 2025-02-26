@@ -56,14 +56,20 @@ btns.forEach((btn) => {
       if (value === "c") {
         display.innerHTML = "";
         expression = "";
+      } else if (value === "del") {
+        expression = expression.slice(0, -1);
+        display.innerHTML = expression;
       } else {
         if (/[+\-x/]/.test(expression.slice(-1)) && /[+\-x/]/.test(value)) {
           return;
+        }
+
+        if (expression === "0" && !/[+\-x/]/.test(value)) {
+          expression = value;
         } else {
           expression += value;
-          display.innerHTML = expression;
-          console.log(expression);
         }
+        display.innerHTML = expression;
       }
     }
   });
