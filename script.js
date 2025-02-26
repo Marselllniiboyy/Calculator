@@ -18,10 +18,6 @@ function calculate(a, operator, b) {
   }
 }
 
-//logik perkalian dulu✅
-// bacspace fitur
-// negatif number
-
 btns.forEach((btn) => {
   btn.addEventListener("click", () => {
     const value = btn.value;
