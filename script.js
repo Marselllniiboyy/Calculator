@@ -15,6 +15,8 @@ function calculate(a, operator, b) {
       return a * b;
     case "/":
       return a / b;
+    case "^":
+      return a ** b;
   }
 }
 
@@ -22,8 +24,8 @@ btns.forEach((btn) => {
   btn.addEventListener("click", () => {
     const value = btn.value;
     if (value === "=") {
-      let operators = expression.match(/[\+\-x\/]/g);
-      let numbers = expression.split(/[\+\-x\/]/).map(Number);
+      let operators = expression.match(/[\+\-x\^/]/g);
+      let numbers = expression.split(/[\+\-x\^/]/).map(Number);
 
       console.log("Operator", operators);
       console.log("Numbers", numbers);
@@ -56,7 +58,7 @@ btns.forEach((btn) => {
         expression = expression.slice(0, -1);
         display.innerHTML = expression;
       } else {
-        if (/[+\-x/]/.test(expression.slice(-1)) && /[+\-x/]/.test(value)) {
+        if (/[+\-x^/]/.test(expression.slice(-1)) && /[+\-x^/]/.test(value)) {
           return;
         }
 
